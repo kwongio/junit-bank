@@ -39,6 +39,9 @@ class AccountServiceTest extends DummyObject {
     private ObjectMapper objectMapper;
 
 
+    public void setUp() {
+        userRepository.save(newUser("1111", "쌀"));
+    }
     @Test
     public void createAccount() throws IOException {
         Long userId = 1L;
@@ -58,6 +61,18 @@ class AccountServiceTest extends DummyObject {
         AccountSaveResponse account1 = accountService.createAccount(userId, accountSaveRequest);
 
 
+    }
+
+    @Test
+    public void deleteAccount() throws IOException {
+        //given
+        Long userId = 1L;
+        Long number = 1111L;
+        User user = newMockUser(1L, "ssar", "쌀");
+        Account account = newMockAccount(1L, number, 1000L, user);
+        when(accountRepository.findByNumber(any())).thenReturn(Optional.of(account));
+
+        accountService.deleteAccount(1111L, userId);
 
     }
 

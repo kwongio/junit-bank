@@ -19,7 +19,6 @@ public class DummyObject {
     protected User newMockUser(Long id, String username, String fullName) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encode = passwordEncoder.encode("1234");
-
         return User.builder().id(id).username(username).password(encode).email(fullName + "@nate.com").fullName(fullName).role(Role.CUSTOMER).createData(LocalDateTime.now()).updateDate(LocalDateTime.now()).build();
     }
 

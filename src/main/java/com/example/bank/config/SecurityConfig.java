@@ -52,7 +52,7 @@ public class SecurityConfig {
         http.exceptionHandling(configurer -> configurer.accessDeniedHandler((request, response, accessDeniedException) -> SecurityResponse.unAuthentication(response, "로그인해주세요")));
         http.exceptionHandling(configurer -> configurer.authenticationEntryPoint((request, response, authException) -> SecurityResponse.unAuthentication(response, "권한없음")));
 
-        http.authorizeHttpRequests(authorization -> authorization.requestMatchers("/api/**").authenticated()
+        http.authorizeHttpRequests(authorization -> authorization.requestMatchers("/api/s/**").authenticated()
                 .requestMatchers("/api/admin/**").hasRole(Role.ADMIN.name())
                 .anyRequest().permitAll());
         return http.build();
